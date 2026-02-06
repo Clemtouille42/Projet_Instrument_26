@@ -1,8 +1,13 @@
 Haut Parleur:
-Cable MIDI:
-Synthétiseur:
-Capteur de Mouvement : VL53L8CX
-Microcontrôleur : STM32G431KB
-Amplificateur classe D type PAM8403.
-Haut-parleur Visaton 66 mm 5W, 4 Ω Pleine Gamme 130 Hz 20 kHz
-Transformateur: BU33SD5WG-TR
+Prise USB type c : USB_C_Receptacle_USB2.0_16P
+-Cable MIDI : 
+-Synthétiseur:
+-Capteur de Mouvement : VL53L8CX
+-Microcontrôleur : STM32G431KB
+-Amplificateur classe D type PAM8403.
+-Haut-parleur Visaton 66 mm 5W, 4 Ω Pleine Gamme 130 Hz 20 kHz
+-Transformateur: BU33SD5WG-TR
+
+-Prise MIDI à choisir :
+  P1134 Breadboard-friendly MIDI Jack
+  RS Stock number 490-923
