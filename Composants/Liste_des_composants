@@ -1,13 +1,11 @@
 Prise USB type c : USB_C_Receptacle_USB2.0_16P
--Cable MIDI : 
--Synthétiseur:
+-Cable MIDI : ?
 -Capteur de Mouvement : VL53L8CX
 -Microcontrôleur : STM32G431KB
 -Amplificateur classe D type PAM8403.
--Haut-parleur Visaton 66 mm 5W, 4 Ω Pleine Gamme 130 Hz 20 kHz
+-Haut-parleur miniature en boîtier 3W 4Ohm avec JST XH2.54
 -Transformateur: BU33SD5WG-TR
 -ferrite 600ohm 100Mhz
-
 
 -Prise MIDI à choisir :
   P1134 Breadboard-friendly MIDI Jack
