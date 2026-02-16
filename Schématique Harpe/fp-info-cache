@@ -1,4 +1,4 @@
-27220788385134949
+27226101368776533
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -107911,3 +107911,24 @@ BU33SD5WG-TR
 0
 5
 5
+composant
+PAM8403DR
+
+
+0
+16
+16
+composant
+USBLC6-2SC6
+
+
+0
+6
+6
+composant
+VL53L8CXV9GC1
+OPT. LGA 6.40X3.0_2024-2
+Integrated Circuit
+0
+17
+17
