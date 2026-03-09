@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP VL53L8CXV9GC_1
+D Low-power high-performance 8x8 multizone Time-of-Flight (ToF) sensor
+K
+F https://www.st.com/resource/en/datasheet/vl53l8cx.pdf
+$ENDCMP
+#
+#End Doc Library
