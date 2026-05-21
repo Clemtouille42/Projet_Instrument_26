@@ -22,10 +22,10 @@ Notre architecture repose sur trois grands piliers matériels, de la détection 
 
 ### 2. Traitement et Gestion de l'Énergie
 * **Microcontrôleur :** STM32G431KB. Il est le cerveau du système : il reçoit les données de position du capteur via I2C et les convertit mathématiquement en notes (ex: mapping de plages de distances vers DO, RE, MI...).
-* **Gestion de l'alimentation :** * Port USB-C avec résistances CC (5.1 kΩ) pour la négociation de puissance.
-  * Batterie Li-ion gérée par un **BMS** intégré pour une utilisation autonome.
-  * **LDO (Régulateur de tension) :** Abaisse la tension à 3.3V de manière stable pour le microcontrôleur et les capteurs.
-  * Filtres et découplage (Ferrite, condensateurs) pour garantir une tension propre et éviter de perturber les mesures de l'ADC ou de l'I2C.
+* **Gestion de l'alimentation :** * **Alimentation directe en 5V** via le connecteur USB-C.
+  * **Résistances CC (5.1 kΩ) :** Tirées vers la masse (GND) sur les broches CC1 et CC2 pour la négociation de puissance et assurer que le système reçoit bien ses 5V.
+  * **LDO (Régulateur de tension) :** Abaisse le 5V en une tension stable de 3.3V, indispensable pour alimenter le microcontrôleur et le capteur ToF.
+  * **Filtrage et découplage :** Utilisation de billes de ferrite et de condensateurs de découplage pour garantir une tension propre, sans parasites, afin de ne pas perturber les communications I2C et les traitements internes.
 
 ### 3. Restitution du signal
 * **Isolation :** Optocoupleur pour garantir l'isolation électrique, protéger le microcontrôleur et éliminer les boucles de masse.
