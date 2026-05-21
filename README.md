@@ -4,60 +4,55 @@
 
 ## Présentation générale
 
-Ce projet consiste à concevoir et réaliser une harpe électronique sans cordes physiques, dans laquelle les cordes traditionnelles sont remplacées par des faisceaux optiques.
-Lorsqu’un utilisateur interrompt un faisceau avec la main, une note de musique est générée, reproduisant le principe de jeu d’une harpe classique tout en exploitant des technologies modernes de détection et de traitement du signal.
+Ce projet consiste à concevoir et réaliser une harpe électronique sans cordes physiques, dans laquelle les cordes traditionnelles sont remplacées par des capteurs. Lorsqu'un utilisateur est détecter par un capteur en fonction de la position et l'hauteur, la harpe vas émettre une note de musique, reproduisant le principe de jeu d'une harpe classique tout en exploitant des technologies modernes de détection et de traitement du signal.
 
 
-## Objectifs du projet
+## Objectifs initial du projet
 
-- Concevoir un instrument de musique basé sur des capteurs optiques
-- Mettre en œuvre une détection, puis un traitement et enfin une génération sonore
-
-
-## Principe de fonctionnement
-
-1. Chaque “corde” de la harpe est matérialisée par un faisceau optique.
-
-2. Lorsque le faisceau est interrompu par la main de l’utilisateur :
-   - l’événement est détecté par un microcontrôleur,
-   - une **note musicale associée** est déclenchée.
-
-3. Le son est :
-
-   - soit généré directement par le système embarqué,
-   - soit transmis sous forme de **signal MIDI** vers un logiciel externe.
+-Mettre en œuvre une détection de mouvement a l'aide de capteurs.
+-Traité les données pour les transformées en note.
+-Envoyer un signal sonore de la note calculer.
 
 
+## Solution mis en place
+
+1. Chaque “corde” de la harpe est simulé par une zone délimité arbitrairement par un capteur Time-of-Flight.
+
+2. Lorsque la main de l’utilisateur entre dans la zone du capteur l’événement est détecté par l'unique capteur qui vas transférer les informations de la position de notre main aux processeur.
+
+3. Le processeur vas traité les données afin de déterminer où verticalement et horizontalement ce trouve notre main pour déterminer respectivement la note (DO RE MI FA SOL LA) et la hauteur (Grave/Aigue)
+
+4. le processeur renvoies ces données sous forme de signal  afin de sortir la dite note.
 
 ## Architecture du système
 
-### 1. Système de détection
+## Composants pour la détection des mouvements :
 
-- Faisceaux optiques alignés verticalement
-- Détection par photodiodes / phototransistors
-- Sortie numérique (faisceau coupé / non coupé)
-- Filtrage logiciel pour éviter les faux déclenchements (bruit, lumière ambiante)
+-Capteur de mouvement (Time-of-Flight) : Détecte la distance de la main.
+-Résistances Pull-up (SDA/SCL) : Pour la communication (I2C) entre les capteurs et le processeur.
+-Adaptateur de niveaux : Pour que les signaux du capteur (en 3.3V) sont compatibles avec le microcontrôleur.
+-Connecteurs : Pour lier physiquement les capteurs à la carte de traitement.
 
-### 2. Unité de traitement
 
-- Microcontrôleur central (STM32G431KB)
-- Lecture en temps réel des capteurs
-- Association capteur - note - octave
-- Gestion de la logique musicale (gamme, modes, sustain)
+## Composant pour le Traitement de l'information
+-Microcontrôleur : reçois la position de la part des capteurs, puis la traite afin de convertir les données de la position en une note
+-Alimentation 5V : Fournit l'énergie stable à toute la logique.
+-LDO Régulateur de tension : Garantit une tension propre, essentielle pour éviter les erreurs de calcul du processeur.
+-Ferrite : Filtre les parasites haute fréquence sur l'alimentation pour ne pas perturber les calculs.
+-Passifs : Condensateurs de découplage pour stabiliser le fonctionnement du microcontrôleur.
 
-### 3. Génération sonore
 
-Plusieurs modes possibles :
+## Composant pour la restitution du signal
 
-- Lecture de fichiers audio pré-enregistrés
-- Synthèse sonore numérique
-- Sortie MIDI vers un ordinateur ou un synthétiseur externe
+Prise MIDI / Câble MIDI : Permet la sortie numérique vers le haut parleur.
 
-### 4. Sortie audio
+Optocoupleur : Garantit l'isolation électrique (protection du microcontrôleur et élimination des boucles de masse).
 
-- Amplificateur audio basse puissance
-- Haut-parleur intégré ou sortie casque
-- Contrôle du volume
+Amplificateur : Reçoit le signal audio numérique/analogique et le prépare pour le haut-parleur.
+
+Mini haut-parleur : Émet la vibration sonore finale.
+
+Résistances CC (Rd 5.1 kΩ) : Permettent la négociation de l'alimentation (via USB-C) pour assurer que le système a assez de puissance pour alimenter l'amplificateur et le reste des composants.
 
 
 
