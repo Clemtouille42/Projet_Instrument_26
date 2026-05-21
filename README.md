@@ -7,20 +7,20 @@
 Ce projet consiste à concevoir et réaliser une harpe électronique sans cordes physiques, dans laquelle les cordes traditionnelles sont remplacées par des capteurs. Lorsqu'un utilisateur est détecter par un capteur en fonction de la position et l'hauteur, la harpe vas émettre une note de musique, reproduisant le principe de jeu d'une harpe classique tout en exploitant des technologies modernes de détection et de traitement du signal.
 
 
-## Objectifs initial du projet
+## Objectifs initiaux du projet
 
 -Mettre en œuvre une détection de mouvement a l'aide de capteurs.
--Traité les données pour les transformées en note.
--Envoyer un signal sonore de la note calculer.
+-Traiter les données pour les transformer en notes.
+-Envoyer un signal sonore de la note calculée.
 
 
-## Solution mis en place
+## Solution mise en place
 
-1. Chaque “corde” de la harpe est simulé par une zone délimité arbitrairement par un capteur Time-of-Flight.
+1. Chaque “corde” de la harpe est simulé par une zone délimitée arbitrairement par un capteur Time-of-Flight (TOF).
 
 2. Lorsque la main de l’utilisateur entre dans la zone du capteur l’événement est détecté par l'unique capteur qui vas transférer les informations de la position de notre main aux processeur.
 
-3. Le processeur vas traité les données afin de déterminer où verticalement et horizontalement ce trouve notre main pour déterminer respectivement la note (DO RE MI FA SOL LA) et la hauteur (Grave/Aigue)
+3. Le processeur va traiter les données afin de déterminer où verticalement et horizontalement ce trouve notre main pour déterminer respectivement la note (DO RE MI FA SOL LA) et la hauteur (Grave/Aigue)
 
 4. le processeur renvoies ces données sous forme de signal  afin de sortir la dite note.
 
