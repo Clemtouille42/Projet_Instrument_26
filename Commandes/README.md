@@ -17,9 +17,9 @@ Cette partie est composée de deux régulateurs de tension en série qui régule
 ---
 
 ## Conception
-La principale contrainte de cette architecture réside dans l'alimentation en 1,8 V des lignes d'entrées/sorties (E/S) du microcontrôleur STM32. L'objectif initial était d'intégrer des adaptateurs de niveau logique (*level shifters*) afin d'éviter une sous-alimentation du STM32 mais cette option a été écarté. 
+La principale contrainte de cette architecture réside dans l'alimentation en 1,8 V des lignes d'entrées/sorties (E/S) du microcontrôleur STM32. L'objectif initial était d'intégrer des adaptateurs de niveau logique (*level shifters*) afin d'éviter une sous-alimentation du STM32 mais cette option a été écarté pour simplifier la conception du pcb (réduire le nombre de composants). 
 
-Cette configuration a imposé de fortes contraintes d'interfaçage, la plupart des autres composants du PCB utilisant une tension IOVDD standard à 3,3 V. Cela a généré des conflits de compatibilité, notamment :
+Cette configuration a imposé des contraintes d'interfaçage, la plupart des autres composants du PCB utilisant une tension IOVDD standard à 3,3 V. Cela a généré des conflits de compatibilité, notamment :
 * L'interface de programmation ST-Link, qui opère nativement avec des niveaux logiques de 3,3 V.
 * L'interface de débogage SWD, qui s'est retrouvée privée de sa tension de référence IOVDD.
 ---
