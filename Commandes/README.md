@@ -87,9 +87,61 @@ Lors de la phase de conception, un problème de synchronisation sous KiCad a emp
 
 De plus, le routage de la paire différentielle USB pourra être optimisé dans une future révision de la carte en supprimant complètement les vias et en appliquant un *length-matching* parfait.
 
+Effectuer des test pour étudier l'adaptation d'impédence.
+
 ---
 
 ## Solution corrective
 
 Pour valider le prototype fonctionnel malgré l'erreur de routage du $V_{BUS}$, un strap (pont filaire) a été soudé manuellement pour amener directement le 5 V aux bornes du régulateur de tension.
+
+
+## Interface midi
+
+L'interface midi est indiquer dans le cahier des charges, elle permet de communiquer a l'ordinateur les notes jouer par l'instrument.
+
+* **Le ACPL-M61L:** Il s'agit d'un opto-coupleur il est obligatoir d'apres les specs du midi , cela permet d'éviter les boucles de masse.
+* * **Le le 74LVC1G125:** Il s'agit du buffer qui permet a la communiaction UART qui sort de l'opto-coupleur d'avoir assez de puissance pour etre reçus de maniere correcte coté PC.
+
+---
+
+## Conception
+
+Je vais etre bref sur cette partie car le Midi est pas ma partie du projet. J'ai choisis les composant standard proposer par des forums sur l'audio.Le APCL respecte le baud rate du midi et la ferite permet d'éviter certain parasite et d'augmenter la portée du midi. Nous avons choisis de faire un midi in/out pour tester la conception entiere d'une interface midi. 
+
+---
+
+## Axes d'amélioration
+
+Je n'ai pas commander la ferite, ça impacte pas vraiment les resultat car le cable commander (voir liste des composants) est court <1m. 
+nous avons pas pu tester pleinment la communication par manque de temps.
+
+---
+
+## Solutions correctives
+
+Pousser des test de CEM pour étudier l'utilitée de la ferrite.
+
+## Partie Audio
+
+Afin de rendre la harpe autonome et de ne pas la faire dépendre entièrement de l'interface MIDI et d'un ordinateur externe, un étage d'amplification de puissance et un haut-parleur (speaker) ont été intégrés directement sur la carte.
+
+* **Le PAM8403 :** Il s'agit d'un amplificateur audio stéréo de classe D. Très populaire dans les systèmes embarqués pour son excellent rendement énergétique, il permet de piloter directement de petits haut-parleurs sans nécessiter de dissipateur thermique externe.
+
+---
+
+## Conception
+
+Le haut parleur indique dans sa documentation qu'il faut de la férite sur ses deux entrée donc nous avons commander celle-ci. 
+---
+
+## Axes d'amélioration
+
+Nous avons pas eu le temps de tester cette partie en profondeur donc c'est compliquer d'avoir un retour d'expériences mais j'imagine que des teste sur l'adaptation d'impédence ou autres aurais pus etre utiles.
+
+néamoins le haut parleur arrive a sortir des bip boup en testant les sortie DAC.
+
+---
+
+
 
