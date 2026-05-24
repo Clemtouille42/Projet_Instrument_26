@@ -17,9 +17,11 @@ Cette partie est composée de deux régulateurs de tension en série qui régule
 ---
 
 ## Conception
+La principale contrainte de cette architecture réside dans l'alimentation en 1,8 V des lignes d'entrées/sorties (E/S) du microcontrôleur STM32. L'objectif initial était d'intégrer des adaptateurs de niveau logique (*level shifters*) afin d'éviter une sous-alimentation du STM32. 
 
-La principale contrainte est l'alimentation en 1.8V de la STM32 car je voulais ajouter des levels shifter mais sans sous-alimenter la stm. Cela nous a pas mal contraint car pour la plupart des composants, IOVDD est du 3.3V. Ce qui a causé des problèmes, notamment avec le ST-link qui est en 3.3V et le SWD qui s'est retrouvé sans iovdd du coup.
-
+Cette configuration a imposé de fortes contraintes d'interfaçage, la plupart des autres composants du PCB utilisant une tension IOVDD standard à 3,3 V. Cela a généré des conflits de compatibilité, notamment :
+* L'interface de programmation ST-Link, qui opère nativement avec des niveaux logiques de 3,3 V.
+* L'interface de débogage SWD, qui s'est retrouvée privée de sa tension de référence IOVDD.
 ---
 
 ## Voie d'amélioration
@@ -28,3 +30,8 @@ Les régulateurs ont une pin on/off (enable) qui permet de les désactiver ou ac
 
 Le fait est que l'USB étant, lors de la phase de test, la seule source d'alimentation puisque IOVDD n'est pas branchée (car les cartes en SWD pull up la tension à 3.3V), la carte s'est retrouvée sans alimentation. Un pont entre EN et le 5V suffit à corriger ce problème.
 
+---
+
+## Solution corrective
+
+Un raccordement physique (pont/strap) entre la broche EN et le rail 5V_USB permet de forcer l'activation permanente des régulateurs. Ce correctif matériel résout le problème de démarrage et sera directement intégré lors de la prochaine révision du routage du PCB.
