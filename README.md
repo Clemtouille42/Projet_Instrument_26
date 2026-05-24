@@ -49,7 +49,7 @@ L'arborescence du projet est organisée de la manière suivante :
 
 * 📁 **`Armature harpe/`** : Fichiers liés à la structure mécanique de la harpe (bois, impression 3D).
 * 📁 **`CODE/`** : Code source C pour le microcontrôleur STM32 (En cours de développement).
-* 📁 **`Commandes/`** : Suivi des achats et factures du matériel.
+* 📁 **`Commandes/`** : Contien les resource concernant la conception du pcb.
 * 📁 **`Composants/`** : Regroupe toutes les ressources matérielles brutes (Datasheets des composants, empreintes spécifiques, nomenclature complète `composants.xlsx`).
 * 📁 **`KiCad Harpe/`** : Projet KiCad complet incluant les schémas électroniques et le routage du PCB de notre carte sur mesure.
 
