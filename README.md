@@ -52,7 +52,7 @@ L'arborescence du projet est organisée de la manière suivante :
 * 📁 **`Commandes/`** : Contien les resource concernant la conception du pcb.
 * 📁 **`Composants/`** : Regroupe toutes les ressources matérielles brutes (Datasheets des composants, empreintes spécifiques, nomenclature complète `composants.xlsx`).
 * 📁 **`KiCad Harpe/`** : Projet KiCad complet incluant les schémas électroniques et le routage du PCB de notre carte sur mesure.
-Pour plus de détaille lire les readme des sous partie.
+Pour plus de détaille lire les readme des sous parties.
 ---
 
 ##  L'Équipe
