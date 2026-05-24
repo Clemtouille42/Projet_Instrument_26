@@ -6,7 +6,7 @@ Ici se trouve la partie logicielle du projet. Cela comprend :
 * Description de l’avancée du projet et des objectifs
 
 
-## Choix de l'Architecture Matérielle et Programmation
+## 1. Choix de l'Architecture Matérielle et Programmation
 
 Pour la programmation de notre microcontrôleur cible, un **STM32G431KBT6**, on a choisi de le codé en passant par une liaison **SWD (Serial Wire Debug)**. Cette méthode permet d'alléger le design de notre carte finale en évitant d'y intégrer un programmateur lourd.
 
