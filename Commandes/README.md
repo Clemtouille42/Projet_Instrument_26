@@ -59,5 +59,5 @@ Ce firmware pèse environ **80 Ko**. Rapporté aux **128 Ko** de mémoire Flash 
 ## Solutions correctives
 
 Pour pallier ce problème de mémoire, deux pistes sont envisageables :
-1. **Migration matérielle :** Remplacer le microcontrôleur actuel par un modèle doté d'une mémoire Flash plus importante (par exemple, un STM32 avec 256 Ko ou 512 Ko de Flash).
+1. **Migration matérielle :** Remplacer le microcontrôleur actuel par un modèle doté d'une mémoire Flash plus importante (par exemple, un STM32 avec 256 Ko ou 512 Ko de Flash) ne pas prendre les composant que l'on nous demande de mettre car dans les stock.
 2. **Optimisation logicielle :** Optimiser l'empreinte mémoire du code global et ajuster les options de compilation (par exemple, via le flag d'optimisation de taille `-Os` sous GCC) pour réduire la taille des bibliothèques HAL et du code utilisateur.
