@@ -61,3 +61,35 @@ Ce firmware pèse environ **80 Ko**. Rapporté aux **128 Ko** de mémoire Flash 
 Pour pallier ce problème de mémoire, deux pistes sont envisageables :
 1. **Migration matérielle :** Remplacer le microcontrôleur actuel par un modèle doté d'une mémoire Flash plus importante (par exemple, un STM32 avec 256 Ko ou 512 Ko de Flash) ne pas prendre les composant que l'on nous demande de mettre car dans les stock.
 2. **Optimisation logicielle :** Optimiser l'empreinte mémoire du code global et ajuster les options de compilation (par exemple, via le flag d'optimisation de taille `-Os` sous GCC) pour réduire la taille des bibliothèques HAL et du code utilisateur.
+
+   
+## Interface USB-C
+
+L'intégration d'un port USB Type-C sur la carte est un choix d'ergonomie, permettant d'alimenter le système en 5 V de manière universelle. Néanmoins, nous avons configuré le STM32 pour qu'il puisse transmettre et recevoir des données via cette interface, offrant ainsi plus de polyvalence pour les phases de test et de débogage.
+
+---
+
+## Conception et routage
+
+Le port USB-C utilise un routage standard incluant les lignes de données ($D+/D-$), le bus d'alimentation ($V_{BUS}$ / 5 V) et la masse ($GND$). L'ensemble a été routé de manière symétrique pour garantir la réversibilité native du connecteur mâle.
+
+Il y a un USBLC6-2SC6 qui sert de protection pour le port usb c'est un composant standard qui est en stock a l'école.
+
+Cependant, deux contraintes critiques liées à la haute vitesse et à la conception du PCB sont à noter :
+* **Paires différentielles :** Les lignes $D+$ et $D-$ forment une paire différentielle qui exige une adaptation d'impédance et des longueurs de pistes strictement identiques (skews minimisés). Bien que cette condition soit globalement respectée sur notre routage, l'équilibrage des longueurs peut encore être affiné.
+* **Intégrité du signal :** La présence de vias sur ces lignes de données n'est pas optimale et peut introduire des discontinuités d'impédance.
+
+---
+
+## Axes d'amélioration
+
+Lors de la phase de conception, un problème de synchronisation sous KiCad a empêché le transfert correct des informations de routage depuis le schéma vers le layout (footprint). À cause de ce bug, la ligne 5 V ($V_{BUS}$) n'a pas été reliée au régulateur de tension 3,3 V.
+
+De plus, le routage de la paire différentielle USB pourra être optimisé dans une future révision de la carte en supprimant complètement les vias et en appliquant un *length-matching* parfait.
+
+---
+
+## Solution corrective
+
+Pour valider le prototype fonctionnel malgré l'erreur de routage du $V_{BUS}$, un strap (pont filaire) a été soudé manuellement pour amener directement le 5 V aux bornes du régulateur de tension.
+
