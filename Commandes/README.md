@@ -30,8 +30,34 @@ Les régulateurs ont une pin on/off (enable) qui permet de les désactiver ou ac
 
 Le fait est que l'USB étant, lors de la phase de test, la seule source d'alimentation puisque IOVDD n'est pas branchée (car les cartes en SWD pull up la tension à 3.3V), la carte s'est retrouvée sans alimentation. Un pont entre EN et le 5V suffit à corriger ce problème.
 
+## Capteur de mouvement / LiDAR
+
+Cette section aborde la partie capteur de la carte, utilisée pour concevoir les cordes virtuelles et sans contact de la harpe.
+
+* **Le VL53L8CX :** Il s'agit d'un module LiDAR d'état solide multizone. Il mesure les distances sur un FoV (champ de vision) de 65° sous forme de matrice 4x4 ou 8x8. Le composant intègre son propre microprocesseur pour traiter le signal en interne. Il est capable de détecter plusieurs cibles au sein d'une même zone (par exemple, à travers une vitre), offre une immunité face au bruit optique et intègre un algorithme de détection de mouvement.
+
+Le composant est multi-tension : il doit être alimenté en 3,3 V (maximum 3,6 V) pour sa partie analogique/laser, et en 1,8 V pour ses IOVDD.
+
 ---
 
-## Solution corrective
+## Conception
 
-Un raccordement physique (pont/strap) entre la broche EN et le rail 5V_USB permet de forcer l'activation permanente des régulateurs. Ce correctif matériel résout le problème de démarrage et sera directement intégré lors de la prochaine révision du routage du PCB.
+Le choix de ce composant repose sur sa capacité à mesurer plusieurs zones simultanément, répondant ainsi à l'exigence du cahier des charges de gérer plusieurs cordes. L'utilisation d'un capteur unique permet de limiter la taille et la complexité du PCB ; en effet, multiplier les LiDARs individuels en $I^2C$ aurait grandement complexifié la gestion des adresses.
+
+Bien que le traitement embarqué du signal soit un aspect secondaire pour notre application, il offre l'avantage de pouvoir intégrer une vitre de protection transparente sur la harpe. De plus, la précision est excellente et le composant intègre son propre système d'auto-calibration.
+
+---
+
+## Axes d'amélioration
+
+L'intégration logicielle de ce composant s'avère complexe. Comme mentionné précédemment, il possède son propre microcontrôleur et nécessite le chargement d'un firmware propriétaire au démarrage, sans quoi aucune mesure n'est possible. 
+
+Ce firmware pèse environ **80 Ko**. Rapporté aux **128 Ko** de mémoire Flash disponibles sur notre STM32G431KBT6, cela représente une charge considérable, d'autant plus qu'il faut conserver de l'espace pour les fonctions HAL, la pile logicielle et le reste de l'application.
+
+---
+
+## Solutions correctives
+
+Pour pallier ce problème de mémoire, deux pistes sont envisageables :
+1. **Migration matérielle :** Remplacer le microcontrôleur actuel par un modèle doté d'une mémoire Flash plus importante (par exemple, un STM32 avec 256 Ko ou 512 Ko de Flash).
+2. **Optimisation logicielle :** Optimiser l'empreinte mémoire du code global et ajuster les options de compilation (par exemple, via le flag d'optimisation de taille `-Os` sous GCC) pour réduire la taille des bibliothèques HAL et du code utilisateur.
